@@ -3,6 +3,7 @@ import { LandingpageComponent } from './landingpage/landingpage.component';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { WomensclothesComponent } from './womensclothes/womensclothes.component';
+import { SigninComponent } from './signin/signin.component';
 
 export const routes: Routes = [
     { path: '', component: LandingpageComponent }, // Default route
@@ -11,5 +12,7 @@ export const routes: Routes = [
         component: DashboardComponent,
         children: [
           { path: 'womenclothes', component: WomensclothesComponent }, // Child route
-        ], },
+        ], 
+    },
+    { path: 'signin', component: SigninComponent }, 
 ];
