@@ -1,4 +1,9 @@
 <div class="add-product-container" *ngIf="user_type === 'admin'">
+  <button class="toggle-button" (click)="toggleForm()">
+    {{ isFormVisible ? 'Hide Add Product' : 'Add New Product' }}
+  </button>
+
+  <div *ngIf="isFormVisible" class="collapsible-content">
     <h2>Add New Product</h2>
     <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
@@ -8,6 +13,7 @@
           Product Name is required.
         </div>
       </div>
+
       <div class="form-group">
         <label for="productDescription">Product Description</label>
         <textarea id="productDescription" formControlName="productDescription" class="form-control"></textarea>
@@ -15,6 +21,7 @@
           Product Description is required.
         </div>
       </div>
+
       <div class="form-group">
         <label for="categoryId">Category ID [1-4]</label>
         <input id="categoryId" formControlName="categoryId" type="number" class="form-control" />
@@ -22,6 +29,7 @@
           Category ID is required.
         </div>
       </div>
+
       <div class="form-group">
         <label for="availability">Availability</label>
         <input id="availability" formControlName="availability" type="number" class="form-control" />
@@ -29,51 +37,50 @@
           Availability is required.
         </div>
       </div>
+
       <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Add Product</button>
     </form>
   </div>
+</div>
+
+
   <div class="products-container">
+
     <h2 *ngIf="user_type === 'admin'" >Manage Products</h2>
     <h2 *ngIf="user_type === 'customer'" >Products</h2>
+    <div *ngIf="products && products.length > 0; else noProducts">
+
     <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Category</th>
-          <th>Availability</th>
-          <th *ngIf="user_type === 'admin'">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let product of products">
-          <td>{{ product.product_id }}</td>
-          <td>
-            <input
-              [(ngModel)]="product.product_name"
-              placeholder="Product Name"
-            />
-          </td>
-          <td>
-            <input
-              [(ngModel)]="product.product_description"
-              placeholder="Product Description"
-            />
-          </td>
-          <td>
-            <input [(ngModel)]="product.category_id" placeholder="Category ID" />
-          </td>
-          <td>
-            <input [(ngModel)]="product.availability" placeholder="Availability" />
-          </td>
-          <td *ngIf="user_type === 'admin'">
-            <button (click)="modifyProduct(product.product_id, product)">
-              Modify
-            </button>
-            <button (click)="deleteProduct(product.product_id)">Delete</button>
-          </td>
-        </tr>
-      </tbody>
+      <div class="product-grid-container">
+        <div class="product-card" *ngFor="let product of products">
+          <img
+            src="images/womensclothes.jpeg"
+            alt="{{ product.product_name }}"
+            class="product-image"
+          >
+          <div class="product-info">
+            <h3 class="product-name">
+              <input [(ngModel)]="product.product_name" placeholder="Product Name" />
+            </h3>
+            <p class="product-description">
+              <textarea [(ngModel)]="product.product_description" placeholder="Description"></textarea>
+            </p>
+            <p class="product-availability">
+              Availability: <input [(ngModel)]="product.availability" placeholder="Availability" />
+            </p>
+          </div>
+          <div class="product-actions" *ngIf="user_type === 'admin'">
+            <button class="btn btn-primary" (click)="modifyProduct(product.product_id, product)">Modify</button>
+            <button class="btn btn-danger" (click)="deleteProduct(product.product_id)">Delete</button>
+          </div>
+        </div>
+      </div>
+
     </table>
+    </div>
+
+    <ng-template #noProducts>
+      <p>No products currently available. Contact admin to add more products.</p>
+    </ng-template>
+
   </div>

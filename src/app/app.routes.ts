@@ -3,6 +3,9 @@ import { LandingpageComponent } from './landingpage/landingpage.component';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { WomensclothesComponent } from './womensclothes/womensclothes.component';
+import { WomensaccessoriesComponent } from './womensaccessories/womensaccessories.component';
+import { KidsclothesComponent } from './kidsclothes/kidsclothes.component';
+import { KidsshoesComponent } from './kidsshoes/kidsshoes.component';
 import { SigninComponent } from './signin/signin.component';
 
 export const routes: Routes = [
@@ -12,6 +15,9 @@ export const routes: Routes = [
         component: DashboardComponent,
         children: [
           { path: 'womenclothes', component: WomensclothesComponent }, // Child route
+          { path: 'womensaccessories', component: WomensaccessoriesComponent },
+          { path: 'kidsclothes', component: KidsclothesComponent },
+          { path: 'kidsshoes', component: KidsshoesComponent },
         ], 
     },
     { path: 'signin', component: SigninComponent }, 

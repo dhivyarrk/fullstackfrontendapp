@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { WomensclothesService } from '../womensclothes.service';
+import { KidsshoesService } from '../kidsshoes.service';
 import { FormsModule } from '@angular/forms';  // <-- Import FormsModule
 import { CommonModule } from '@angular/common'; // <-- Import CommonModule for ngFor
 import { ReactiveFormsModule } from '@angular/forms';  // Import ReactiveFormsModule
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router'; // For navigation
 
-
 @Component({
-  selector: 'app-womensclothes',
+  selector: 'app-kidsshoes',
   standalone: true,
   imports: [FormsModule, CommonModule, ReactiveFormsModule],
-  templateUrl: './womensclothes.component.html',
-  styleUrl: './womensclothes.component.scss'
+  templateUrl: './kidsshoes.component.html',
+  styleUrl: './kidsshoes.component.scss'
 })
-export class WomensclothesComponent implements OnInit {
+export class KidsshoesComponent implements OnInit {
   isFormVisible = false;
     // Initialize productForm as a new FormGroup
     productForm: FormGroup = new FormGroup({
@@ -32,7 +31,7 @@ export class WomensclothesComponent implements OnInit {
 
 
 
-  constructor(private womensclothesService: WomensclothesService, private router: Router ) {}
+  constructor(private kidsshoesService: KidsshoesService, private router: Router ) {}
 
   toggleForm() {
     this.isFormVisible = !this.isFormVisible;
@@ -53,7 +52,7 @@ export class WomensclothesComponent implements OnInit {
     }
 
     // Call the addProduct method from the product service
-    this.womensclothesService.addProduct(this.productForm.value).subscribe(
+    this.kidsshoesService.addProduct(this.productForm.value).subscribe(
       (response) => {
         alert('Product added successfully!');
         //console.log('Product added successfully:', response);
@@ -74,7 +73,7 @@ export class WomensclothesComponent implements OnInit {
 
   // Load all products using the service
   loadProducts() {
-    this.womensclothesService.getProducts().subscribe({
+    this.kidsshoesService.getProducts().subscribe({
       next: (res) => {
         this.products = res;
         console.log("hello");
@@ -90,7 +89,7 @@ export class WomensclothesComponent implements OnInit {
   // Delete a product
   deleteProduct(productId: number) {
     if (confirm('Are you sure you want to delete this product?')) {
-      this.womensclothesService.deleteProduct(productId).subscribe({
+      this.kidsshoesService.deleteProduct(productId).subscribe({
         next: () => {
           alert('Product deleted successfully!');
           this.loadProducts(); // Reload the product list
@@ -104,7 +103,7 @@ export class WomensclothesComponent implements OnInit {
 
   // Modify a product
   modifyProduct(productId: number, updatedProduct: any) {
-    this.womensclothesService.modifyProduct(productId, updatedProduct).subscribe({
+    this.kidsshoesService.modifyProduct(productId, updatedProduct).subscribe({
       next: () => {
         alert('Product updated successfully!');
         this.loadProducts(); // Reload the product list
