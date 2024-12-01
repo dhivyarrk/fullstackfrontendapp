@@ -7,10 +7,14 @@ import { WomensaccessoriesComponent } from './womensaccessories/womensaccessorie
 import { KidsclothesComponent } from './kidsclothes/kidsclothes.component';
 import { KidsshoesComponent } from './kidsshoes/kidsshoes.component';
 import { SigninComponent } from './signin/signin.component';
+import { CallbackComponent } from './callback/callback.component';
 
 export const routes: Routes = [
     { path: '', component: LandingpageComponent }, // Default route
     { path: 'signup', component: SignupComponent }, 
+    { path: 'login', component: LandingpageComponent },
+    { path: 'callback', component: CallbackComponent }, // Adjust if you need to redirect to a different component
+
     { path: 'dashboard',
         component: DashboardComponent,
         children: [
