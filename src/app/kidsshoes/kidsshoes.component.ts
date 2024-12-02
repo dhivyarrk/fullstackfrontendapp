@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common'; // <-- Import CommonModule for n
 import { ReactiveFormsModule } from '@angular/forms';  // Import ReactiveFormsModule
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router'; // For navigation
+import { CartItem} from '../models/cart.model'
 
 @Component({
   selector: 'app-kidsshoes',
@@ -19,11 +20,13 @@ export class KidsshoesComponent implements OnInit {
     productForm: FormGroup = new FormGroup({
       productName: new FormControl('', Validators.required),
       productDescription: new FormControl('', Validators.required),
+      productPrice: new FormControl('', Validators.required),
       categoryId: new FormControl('', Validators.required),
       availability: new FormControl('', Validators.required)
     });
 
   products: any[] = [];
+  cartItems: CartItem[] = [];
 
   user_type = localStorage.getItem('user_type');
 
@@ -68,6 +71,7 @@ export class KidsshoesComponent implements OnInit {
     // Getters for form controls to simplify access in the template
     get productName() { return this.productForm.get('productName'); }
     get productDescription() { return this.productForm.get('productDescription'); }
+    get productPrice() { return this.productForm.get('productPrice'); }
     get categoryId() { return this.productForm.get('categoryId'); }
     get availability() { return this.productForm.get('availability'); }
 
@@ -112,5 +116,36 @@ export class KidsshoesComponent implements OnInit {
         alert(err.error.message || 'Failed to update the product');
       },
     });
+  }
+
+  addToCart(product_id: number) {
+    console.log("add card called");
+    const product = this.products.find(p => p.product_id === product_id);
+    console.log("prod");
+    console.log(product);
+    // If product is found and available
+    if (product && product.availability > 0) {
+      const existingItemIndex = this.cartItems.findIndex(item => item.product_id === product_id);
+      console.log(existingItemIndex);
+      if (existingItemIndex !== -1) {
+        // If the product is already in the cart, increase the quantity
+        this.cartItems[existingItemIndex].quantity += 1;
+      } else {
+        // If the product is not in the cart, add it
+        this.cartItems.push({
+          ...product,
+          quantity: 1
+        });
+      }
+      console.log(this.cartItems);
+
+      // Update localStorage with the new cart items
+      localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+      console.log('Product added to cart:', product);
+    }
+    //this.womensclothesService.addToCart(productId).subscribe(
+    //  () => alert('Product added to cart successfully!'),
+     // (error) => alert(error.error.message || 'Failed to add product to cart')
+    //);
   }
 }

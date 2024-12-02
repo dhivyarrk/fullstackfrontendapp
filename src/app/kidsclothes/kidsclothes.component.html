@@ -29,7 +29,13 @@
             Category ID is required.
           </div>
         </div>
-  
+        <div class="form-group">
+          <label for="productPrice">Product Price</label>
+          <textarea id="productPrice" formControlName="productPrice" class="form-control"></textarea>
+          <div *ngIf="productPrice?.invalid && productPrice?.touched" class="error-message">
+            Product Price is required.
+          </div>
+        </div>
         <div class="form-group">
           <label for="availability">Availability</label>
           <input id="availability" formControlName="availability" type="number" class="form-control" />
@@ -73,9 +79,14 @@
               <button class="btn btn-primary" (click)="modifyProduct(product.product_id, product)">Modify</button>
               <button class="btn btn-danger" (click)="deleteProduct(product.product_id)">Delete</button>
             </div>
+            <button
+            class="btn btn-success"
+            [disabled]="product.availability <= 0"
+            (click)="addToCart(product.product_id)">
+            {{ product.availability > 0 ? 'Add to Cart' : 'Out of Stock' }}
+          </button>
           </div>
         </div>
-  
       </table>
       </div>
   
