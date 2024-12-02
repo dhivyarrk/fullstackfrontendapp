@@ -23,14 +23,16 @@ export class SignupComponent {
     onSubmit() {
       this.authService.signup(this.user).subscribe({
         next: (response) => {
-          alert('Signup successful!');
-          console.log("signup");
-          console.log(response);
-          localStorage.setItem('user', response.user.user_name); // Save JWT token
-          
-          localStorage.setItem('token', response.user.token); // Save JWT token
-          localStorage.setItem('user_type', response.user.user_type); // Save JWT token
-          this.router.navigate(['/dashboard']); // Navigate to products page
+          if (response.error) {
+            alert('Signin failed: ' + response.error);
+          }
+          else {
+            alert('Signup successful!');
+            localStorage.setItem('user', response.user.user_name); // Save JWT token
+            localStorage.setItem('token', response.user.token); // Save JWT token
+            localStorage.setItem('user_type', response.user.user_type); // Save JWT token
+            this.router.navigate(['/dashboard']); // Navigate to products page
+          }
         },
         error: (error) => alert('Error during signup: ' + error.message),
       });
