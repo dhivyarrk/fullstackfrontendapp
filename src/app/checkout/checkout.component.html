@@ -5,13 +5,20 @@
     </div>
 
     <div *ngIf="cartItems.length > 0">
+      <p><strong> Items in the cart </strong></p>
+
       <div *ngFor="let item of cartItems">
-        Item: {{ item }}
-        <div class="cart-item">
-          <p>{{ item.product_name }} (x{{ item.quantity }}) - ${{ item.price }}</p>
+        <div>
+          Item:
         </div>
+        <ul>
+          <li *ngFor="let key of objectKeys(item)">
+            {{ key }}: {{ item[key] }}
+          </li>
+        </ul>
       </div>
 
+      
       <div class="total">
         <p><strong>Total: ${{ totalAmount }}</strong></p>
       </div>

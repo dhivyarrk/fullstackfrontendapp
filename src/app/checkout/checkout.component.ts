@@ -23,11 +23,15 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     // For demonstration, you would normally fetch cart items from the backend or localStorage
     this.cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+    //this.info = JSON(this.cartItems);
     this.calculateTotal();
   }
 
+  objectKeys(obj: any): string[] {
+    return Object.keys(obj);
+  }
   calculateTotal(): void {
-    this.totalAmount = this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    this.totalAmount = this.cartItems.reduce((total, item) => total + item.product_price * item.quantity, 0);
   }
   checkout(): void {
     if (!this.token) {

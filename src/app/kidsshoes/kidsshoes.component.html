@@ -23,14 +23,14 @@
         </div>
   
         <div class="form-group">
-          <label for="categoryId">Category ID [1-4]</label>
+          <label for="categoryId">Category ID</label>
           <input id="categoryId" formControlName="categoryId" type="number" class="form-control" />
           <div *ngIf="categoryId?.invalid && categoryId?.touched" class="error-message">
             Category ID is required.
           </div>
         </div>
         <div class="form-group">
-          <label for="productPrice">Product Price</label>
+          <label for="productPrice">Product Price (in Euros)</label>
           <textarea id="productPrice" formControlName="productPrice" class="form-control"></textarea>
           <div *ngIf="productPrice?.invalid && productPrice?.touched" class="error-message">
             Product Price is required.
@@ -71,8 +71,11 @@
               <p class="product-description">
                 <textarea [(ngModel)]="product.product_description" placeholder="Description"></textarea>
               </p>
-              <p class="product-availability">
+              <p class="product-availability" *ngIf="user_type === 'admin'">
                 Availability: <input [(ngModel)]="product.availability" placeholder="Availability" />
+              </p>
+              <p class="product-availability">
+                Price(in Euros): <input [(ngModel)]="product.price" placeholder="Price" />
               </p>
             </div>
             <div class="product-actions" *ngIf="user_type === 'admin'">

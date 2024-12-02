@@ -1,4 +1,7 @@
-<h1 > Sign up form</h1>
+
+<div class="container">
+  <h1 class="title"> Sign up form</h1>
+
 <form (ngSubmit)="onSubmit()" class="un" #signupForm="ngForm">
   <label for="user_name">User Name:</label>
   <input id="user_name" name="user_name" [(ngModel)]="user.user_name" required /><br>
@@ -20,3 +23,4 @@
   </select><br>
   <button type="submit">Signup</button>
 </form>
+</div>

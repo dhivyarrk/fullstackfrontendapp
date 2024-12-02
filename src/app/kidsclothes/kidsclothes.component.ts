@@ -118,9 +118,16 @@ export class KidsclothesComponent implements OnInit {
     });
   }
   addToCart(product_id: number) {
-    console.log("add card called");
     const product = this.products.find(p => p.product_id === product_id);
-    console.log("prod");
+    if (localStorage.getItem('cartItems')) {
+      const storedCartItems = localStorage.getItem('cartItems');
+      this.cartItems = storedCartItems ? JSON.parse(storedCartItems) as CartItem[] : [];
+    }
+    else {
+      console.log("empyt in wa1")
+      console.log(this.cartItems);
+
+    }
     console.log(product);
     // If product is found and available
     if (product && product.availability > 0) {

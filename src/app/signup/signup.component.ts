@@ -26,6 +26,8 @@ export class SignupComponent {
           alert('Signup successful!');
           console.log("signup");
           console.log(response);
+          localStorage.setItem('user', response.user.user_name); // Save JWT token
+          
           localStorage.setItem('token', response.user.token); // Save JWT token
           localStorage.setItem('user_type', response.user.user_type); // Save JWT token
           this.router.navigate(['/dashboard']); // Navigate to products page

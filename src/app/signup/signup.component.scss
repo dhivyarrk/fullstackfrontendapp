@@ -1,16 +1,43 @@
+/* Container for centering */
+.container {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center; /* Center items vertically */
+  align-items: center; /* Center items horizontally */
+  min-height: 50vh; /* Full viewport height */
+  text-align: center; /* Center text content */
+  padding: 20px; /* Space around the container */
+  box-sizing: border-box; /* Include padding in dimensions */
+}
+
+/* Style for the heading */
+.title {
+  margin-bottom: 20px; /* Add space between heading and form */
+  font-size: 2rem; /* Optional: Adjust font size */
+  color: #333; /* Optional: Heading color */
+}
+
+/* Style for the form */
 .un {
-    color: rgba(16, 15, 14, 0.88);
-    align-self: center;
- 
-   }
+  color: rgba(16, 15, 14, 0.88);
+  background-color: #f9f9f9; /* Optional: Form background */
+  width: 100%; /* Full width on small screens */
+  max-width: 400px; /* Limit width on larger screens */
+  padding: 20px; /* Space inside the form */
+  border: 1px solid #ccc; /* Optional: Border */
+  border-radius: 8px; /* Optional: Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow */
+  background-color: darksalmon;
+
+}
+
  .un1 {
      color: rgba(163, 13, 13, 0.894);
  }
  
  h1 {
    text-align: center;
-   background-color: rgb(14, 201, 39);
- 
+  background-color: rgb(14, 201, 39); 
  }
  
  

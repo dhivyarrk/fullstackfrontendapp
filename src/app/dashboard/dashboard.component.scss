@@ -1,64 +1,115 @@
-// Variables for colors
 $primary-color: #4CAF50; // Green
 $text-color: #ffffff;
 $hover-color: #3e8e41;
-$background-color: #f4f4f4;
-// Navbar Styling
+/* General Styling */
+h1 {
+  font-size: 50px;
+  align-self: center;
+  align-content: center;
+
+
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: $primary-color;
+  background-color: #333;
+  color: #fff;
   padding: 0.5rem 1rem;
-  &__brand {
-    color: $text-color;
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  &__menu {
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      li {
-        margin-left: 1rem;
-        a {
-          text-decoration: none;
-          color: $text-color;
-          padding: 0.5rem 1rem;
-          border-radius: 5px;
-          &:hover {
-            background-color: $hover-color;
-          }
-          &.active {
-            background-color: darken($primary-color, 10%);
-          }
-        }
-      }
-    }
-  }
+  flex-wrap: wrap; /* Allows wrapping on small screens */
 }
-// Content Styling
-.content {
-  padding: 1rem;
-  background-color: $background-color;
+
+.navbar__brand h1 {
+  font-size: 1.5rem;
+  margin: 0;
 }
+
+.navbar__menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.navbar__items {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  gap: 0.5rem;
+}
+
+.navbar__items li {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__items a,
+.navbar__items button {
+  text-decoration: none;
+  color: #fff;
+  //background: #00ff55;
+  background: blueviolet;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.navbar__items .btn-danger {
+  background-color: #dc3545;
+}
+
+.navbar__toggle {
+  display: none;
+  font-size: 1.5rem;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.navbar__toggle:focus {
+  outline: none;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-    .navbar__menu ul {
-      flex-direction: column;
-      align-items: center;
-    }
-    .navbar__menu li {
-      margin: 0.5rem 0;
-    }
+  .navbar__toggle {
+    display: block;
   }
-  .btn {
-    padding: 10px 20px;
-    cursor: pointer;
+
+  .navbar__menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 0; /* Reset gap for column layout */
   }
-  .btn-danger {
-    background-color: #dc3545;
-    color: white;
-    border: none;
+
+  .navbar__menu.open {
+    display: flex;
   }
+
+  .navbar__items {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .navbar__items li {
+    width: 100%;
+  }
+
+  .navbar__items a,
+  .navbar__items button {
+    text-align: left;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0;
+  }
+}

@@ -37,6 +37,7 @@ logout(): void {
   // Clear any stored authentication data (like tokens)
   localStorage.removeItem('token'); // Assuming token is stored in localStorage
   localStorage.removeItem('user_type'); // Assuming token is stored in localStorage
+  localStorage.removeItem('cartItems'); // Assuming token is stored in localStorage
   sessionStorage.clear(); // Optionally clear session storage
 }
 }

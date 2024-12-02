@@ -11,6 +11,13 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class DashboardComponent {
   constructor(private router: Router, private authService: AuthService) {}
+  menuOpen: boolean = false;
+
+toggleMenu(): void {
+  this.menuOpen = !this.menuOpen;
+}
+ user_name = localStorage.getItem('user'); // Save JWT token
+        
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/']); // Navigate to the login page
