@@ -8,6 +8,7 @@ import { KidsclothesComponent } from './kidsclothes/kidsclothes.component';
 import { KidsshoesComponent } from './kidsshoes/kidsshoes.component';
 import { SigninComponent } from './signin/signin.component';
 import { CallbackComponent } from './callback/callback.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 export const routes: Routes = [
     { path: '', component: LandingpageComponent }, // Default route
@@ -22,7 +23,9 @@ export const routes: Routes = [
           { path: 'womensaccessories', component: WomensaccessoriesComponent },
           { path: 'kidsclothes', component: KidsclothesComponent },
           { path: 'kidsshoes', component: KidsshoesComponent },
+          { path: 'checkout', component: CheckoutComponent },
         ], 
     },
+  
     { path: 'signin', component: SigninComponent }, 
 ];
