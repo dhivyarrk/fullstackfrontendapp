@@ -22,10 +22,16 @@
       <div class="total">
         <p><strong>Total: ${{ totalAmount }}</strong></p>
       </div>
-
+<!--
       <button (click)="checkout()" [disabled]="loading" class="btn btn-success">
         <span *ngIf="loading">Processing...</span>
         <span *ngIf="!loading">Complete Checkout</span>
       </button>
+-->
+      <button routerLink="/dashboard/payment" class="btn btn-primary">Proceed to CHeckout</button>
+
     </div>
   </div>
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>

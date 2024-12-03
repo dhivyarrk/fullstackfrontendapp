@@ -9,6 +9,9 @@ import { KidsshoesComponent } from './kidsshoes/kidsshoes.component';
 import { SigninComponent } from './signin/signin.component';
 import { CallbackComponent } from './callback/callback.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { PaymentComponent } from './payment/payment.component';
+import { ContactComponent } from './contact/contact.component';
+
 
 export const routes: Routes = [
     { path: '', component: LandingpageComponent }, // Default route
@@ -24,8 +27,13 @@ export const routes: Routes = [
           { path: 'kidsclothes', component: KidsclothesComponent },
           { path: 'kidsshoes', component: KidsshoesComponent },
           { path: 'checkout', component: CheckoutComponent },
+          { path: 'payment', component: PaymentComponent},
+          { path: 'contact', component: ContactComponent},
+
         ], 
     },
+    //{ path: 'payment', component: PaymentComponent},
   
     { path: 'signin', component: SigninComponent }, 
+
 ];

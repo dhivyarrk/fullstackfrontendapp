@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckoutService } from '../checkout.service';  // Import the service
 import { CommonModule } from '@angular/common';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, RouterModule],
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss']
 })
