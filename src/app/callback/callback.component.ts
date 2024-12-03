@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {API_URL} from '../env';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-callback',
@@ -15,30 +16,34 @@ export class CallbackComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient) {}
 
   ngOnInit(): void {
+    console.log("in init");
     // Call function to handle the callback and extract data from URL
     this.handleCallback();
   }
 
-  handleCallback(): void {
-    // Extract the user info from the query parameters
-    //const urlParams = new URLSearchParams(window.location.search);
-    //const userInfo = JSON.parse(urlParams.get('user_info') || '{}');
 
-    console.log("what is here");
-    this.http.get(`${API_URL}/user_info`, { withCredentials: true }).subscribe(
-      (response: any) => {
-        console.log("response in callback");
-        console.log(response);
-        //localStorage.setItem('user', JSON.stringify(response.user_info));
-        localStorage.setItem('user', response.user.user_name); // Save JWT token
-        localStorage.setItem('token', response.user.token); // Save JWT token
-        localStorage.setItem('user_type', response.user.user_type); // Save JWT token
-        this.router.navigate(['/dashboard']);
-      },
-      (error) => {
-        console.error('Error fetching user info:', error);
-      }
-    );
-    
+async handleCallback(): Promise<void> {
+  try {
+    console.log('Initiating HTTP GET request');
+    const response: any = await firstValueFrom(this.http.get(`${API_URL}/user_info`, { withCredentials: true }));
+    console.log('Response received:', response);
+
+    if (response && response.user) {
+      console.log('Saving user data to localStorage');
+      console.log(response);
+      localStorage.setItem('user', response.user.user_name); // Save user_name
+      localStorage.setItem('token', response.user.token); // Save JWT token
+      localStorage.setItem('user_type', response.user.user_type); // Save user_type
+      await this.router.navigate(['/dashboard']); // Navigate after saving
+    } else {
+      console.log("in  else");
+      console.warn('Response does not contain user data:', response);
+    }
+  } catch (error) {
+    console.log("in error");
+    console.error('Error fetching user info:', error);
   }
+}
+
+
 }
