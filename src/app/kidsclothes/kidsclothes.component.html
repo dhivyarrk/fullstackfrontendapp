@@ -75,7 +75,7 @@
                 Availability: <input [(ngModel)]="product.availability" placeholder="Availability" />
               </p>
               <p class="product-availability">
-                Price(in Euros): <input [(ngModel)]="product.price" placeholder="Price" />
+                Price(in Euros): <input [(ngModel)]="product.product_price" placeholder="Price" />
               </p>
             </div>
             <div class="product-actions" *ngIf="user_type === 'admin'">
@@ -85,7 +85,7 @@
             <button
             class="btn btn-success"
             [disabled]="product.availability <= 0"
-            (click)="addToCart(product.product_id)">
+            (click)="addToCart(product.product_id, product.category_id)">
             {{ product.availability > 0 ? 'Add to Cart' : 'Out of Stock' }}
           </button>
           </div>

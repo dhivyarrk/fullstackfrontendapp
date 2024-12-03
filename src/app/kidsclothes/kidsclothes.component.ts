@@ -117,7 +117,7 @@ export class KidsclothesComponent implements OnInit {
       },
     });
   }
-  addToCart(product_id: number) {
+  addToCart(product_id: number, category_id: number) {
     const product = this.products.find(p => p.product_id === product_id);
     if (localStorage.getItem('cartItems')) {
       const storedCartItems = localStorage.getItem('cartItems');
@@ -131,7 +131,7 @@ export class KidsclothesComponent implements OnInit {
     console.log(product);
     // If product is found and available
     if (product && product.availability > 0) {
-      const existingItemIndex = this.cartItems.findIndex(item => item.product_id === product_id);
+      const existingItemIndex = this.cartItems.findIndex(item => item.product_id === product_id && item.category_id === category_id);
       console.log(existingItemIndex);
       if (existingItemIndex !== -1) {
         // If the product is already in the cart, increase the quantity
