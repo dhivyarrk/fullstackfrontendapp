@@ -117,7 +117,7 @@ export class WomensaccessoriesComponent implements OnInit {
     });
   }
 
-  addToCart(product_id: number) {
+  addToCart(product_id: number, category_id: number) {
     console.log("add card called");
     const product = this.products.find(p => p.product_id === product_id);
     console.log("prod");
