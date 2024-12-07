@@ -40,9 +40,9 @@ logout(): void {
   localStorage.removeItem('cartItems'); // Assuming token is stored in localStorage
   sessionStorage.clear(); // Optionally clear session storage
 }
-
+/*
 handleoauthcallback(): Observable<any> {
   return this.http.get(`${API_URL}/user_info`);
-}
+} */
 
 }
