@@ -5,7 +5,7 @@ import {API_URL} from '../env';
 import { firstValueFrom } from 'rxjs';
 import { constants } from 'node:zlib';
 import { Observable } from 'rxjs';
-
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-callback',
@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 })
 export class CallbackComponent implements OnInit {
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient, private authService: AuthService) {}
 
   ngOnInit(): void {
     console.log("in init");
@@ -26,21 +26,25 @@ export class CallbackComponent implements OnInit {
 
   }
 
-
-
-  handleCallback(): any {
-    //const token = localStorage.getItem('token');
-    const response = this.http.get(`${API_URL}/user_info`
-      //, {
-      // headers: { Authorization: `Bearer ${token}` },
-  //  }
-  );
-  console.log("inhandlecallback");
-  console.log(response);
-
+  handleCallback() {
+    this.authService.handleoauthcallback().subscribe({
+        next: (response) => { // Define the expected shape of 'response'
+          //alert('Signin successful!');
+          console.log("callback");
+          console.log(response);
+          if (response.error) {
+            alert('Signin sso failed: ' + response.error);
+          }
+          else {
+            alert('Signin sso successful!');
+            //localStorage.setItem('user', response.user.user_name); // Save JWT token
+            //localStorage.setItem('token', response.user.token); // Save JWT token
+            //localStorage.setItem('user_type', response.user.user_type); // Save JWT token
+            console.log(response.user);
+            //this.router.navigate(['/dashboard']); // Navigate to products page
+          }
+        },
+        error: (error: any) => alert('Signin sso failed: ' + error.error.error),
+      });
   }
-
-
-
-
 }
