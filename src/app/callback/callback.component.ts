@@ -27,10 +27,10 @@ export class CallbackComponent implements OnInit {
 async handleCallback(): Promise<void> {
   try {
     console.log('Initiating HTTP GET request');
-    const response: any = await firstValueFrom(this.http.get(`${API_URL}/user_info`, { withCredentials: true }));
+    const response: any = await firstValueFrom(this.http.get(`${API_URL}/user_info`));
     console.log('API URL:', `${API_URL}/user_info`);
     console.log('Response received:', response);
-    this.http.get(`${API_URL}/user_info`, { withCredentials: true }).subscribe({
+    this.http.get(`${API_URL}/user_info`).subscribe({
       next: data => console.log('Data:', data),
       error: err => console.error('Error:', err),
       complete: () => console.log('Request completed')
