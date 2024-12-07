@@ -18,7 +18,9 @@ export class CallbackComponent implements OnInit {
   ngOnInit(): void {
     console.log("in init");
     // Call function to handle the callback and extract data from URL
-    this.handleCallback();
+    //this.handleCallback();
+    this.handleCallback().catch(err => console.error('handleCallback error:', err));
+
   }
 
 
@@ -26,8 +28,14 @@ async handleCallback(): Promise<void> {
   try {
     console.log('Initiating HTTP GET request');
     const response: any = await firstValueFrom(this.http.get(`${API_URL}/user_info`, { withCredentials: true }));
+    console.log('API URL:', `${API_URL}/user_info`);
     console.log('Response received:', response);
-
+    this.http.get(`${API_URL}/user_info`, { withCredentials: true }).subscribe({
+      next: data => console.log('Data:', data),
+      error: err => console.error('Error:', err),
+      complete: () => console.log('Request completed')
+    });
+    
     if (response && response.user) {
       console.log('Saving user data to localStorage');
       console.log(response);
